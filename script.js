@@ -12,14 +12,22 @@ let songs=[
 ]
 
 let songItems = Array.from(document.getElementsByClassName('songItem'));
+let name1 =Array.from(document.getElementsByClassName('bottom'));
+let name0 = document.getElementById('name0');
+let time0 = document.getElementById('times');
 let songIndex=0;
+let myProgressBar= document.getElementsByClassName('myProgressBar')[0];
 let masterPlay = document.getElementById('masterPlay');
-let myProgressBar = document.getElementById('myProgressBar');
+let progressed = document.getElementById('progressed');
 let audioElement= new Audio("1.mp3")
 songItems.forEach((element,i)=>{
     element.getElementsByTagName("img")[0].src= songs[i].coverPath;
     element.getElementsByClassName("songName")[0].innerText= songs[i].songname;
-    element.getElementsByClassName("timestamp")[0].innerText=songs[i].timestamp
+    element.getElementsByClassName("timestamp")[0].innerText=songs[i].timestamp;
+})
+name1.forEach((element,i)=>{
+    element.getElementsByClassName("name1")[0].innerText=songs[i].songname;
+    element.getElementsByClassName("time0")[0].innerText=songs[i].timestamp;
 })
 masterPlay.addEventListener('click',()=>{
     if(audioElement.paused || audioElement.currentTime<=0){
@@ -31,15 +39,18 @@ masterPlay.addEventListener('click',()=>{
 })
 audioElement.addEventListener('timeupdate',()=>{
     progress = parseInt((audioElement.currentTime/audioElement.duration)*100);
-    myProgressBar.value = progress;
+    progressed.style.width=progress+"%";
 })
-myProgressBar.addEventListener('change',()=>{
-    audioElement.currentTime= myProgressBar.value*audioElement.duration/100;
+myProgressBar.addEventListener('click',(e)=>{
+    audioElement.currentTime=((e.offsetX/myProgressBar.offsetWidth)*audioElement.duration);
 })
+
 Array.from(document.getElementsByClassName('plbtn')).forEach((element)=>{
     element.addEventListener('click',(e)=>{
         songIndex= parseInt(e.target.id);
         audioElement.src=`${songIndex}.mp3`;
+        name0.innerText=songs[songIndex-1].songname;
+        time0.innerText=songs[songIndex-1].timestamp;
         audioElement.currentTime=0;
         audioElement.play();
     })
@@ -55,7 +66,8 @@ document.getElementById('next').addEventListener('click',()=>{
     audioElement.src=`${songIndex}.mp3`;
     audioElement.currentTime=0;
     audioElement.play();
-
+    name0.innerText=songs[songIndex-1].songname;
+    time0.innerText=songs[songIndex-1].timestamp;
 })
 document.getElementById('previous').addEventListener('click',()=>{
     if(songIndex<=1){
@@ -65,8 +77,9 @@ document.getElementById('previous').addEventListener('click',()=>{
         songIndex-=1;
  
     }
-     audioElement.src=`${songIndex}.mp3`;
-     audioElement.currentTime=0;
-     audioElement.play();
- 
+    audioElement.src=`${songIndex}.mp3`;
+    audioElement.currentTime=0;
+    audioElement.play();
+    name0.innerText=songs[songIndex-1].songname; 
+    time0.innerText=songs[songIndex-1].timestamp;
  })
