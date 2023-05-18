@@ -44,9 +44,29 @@
     background-image: url('2.jpg');
     background-size:contain;
 }
-#myProgressBar{
-    width: 80vw;
-    
+.myProgressBar{
+    height: 10px;
+    width: 50%;
+    background-color:white;
+    border-radius: 13px;
+}
+#progressed{
+    height: 10px;
+    width: 50%;
+    background-color: blue;
+    transition: all 2s;
+    border-radius: 13px;
+    position: relative;
+}
+#progressed::after{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius:10px;
+    background-color: blue;
 }
 .icons img{
     height: 30px;
@@ -84,3 +104,23 @@
 .songItemContainer{
     margin-top: 74px;
 }
+#times{
+    width: auto;
+    padding-left: 34vw;
+    margin-top: 40px;
+}
+.name1{
+    margin-top: 40px;
+}
+.up{
+    display: flex;
+    width: 50vw;
+    margin: auto;
+}
+@media screen and (max-width: 600px) {
+    #times {
+        float: right;
+        width: auto;
+        padding-left:10vw ;
+    }
+  }
