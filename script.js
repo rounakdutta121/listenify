@@ -71,7 +71,7 @@ document.getElementById('next').addEventListener('click',()=>{
 })
 document.getElementById('previous').addEventListener('click',()=>{
     if(songIndex<=1){
-          songIndex=1;
+          songIndex=10;
     }
     else{
         songIndex-=1;
