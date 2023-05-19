@@ -44,9 +44,6 @@ audioElement.addEventListener('timeupdate', () => {
 myProgressBar.addEventListener('click', (e) => {
     audioElement.currentTime = ((e.offsetX / myProgressBar.offsetWidth) * audioElement.duration);
 })
-myProgressBar.addEventListener('drag', (e) => {
-    audioElement.currentTime = ((e.offsetX / myProgressBar.offsetWidth) * audioElement.duration);
-})
 
 Array.from(document.getElementsByClassName('plbtn')).forEach((element) => {
     element.addEventListener('click', (e) => {
