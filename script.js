@@ -10,7 +10,7 @@ let songs=[
     {songname:"Mujhe Peene Do", filePath:"9.mp3", coverPath:"11.jpg", timestamp:"3:13"},
     {songname:"Baarishon Mein", filePath:"10.mp3", coverPath:"12.jpg", timestamp:"4:03"},
 ]
-
+let lop = document.getElementById('bop');
 let songItems = Array.from(document.getElementsByClassName('songItem'));
 let name1 =Array.from(document.getElementsByClassName('bottom'));
 let name0 = document.getElementById('name0');
@@ -44,6 +44,9 @@ audioElement.addEventListener('timeupdate',()=>{
 myProgressBar.addEventListener('click',(e)=>{
     audioElement.currentTime=((e.offsetX/myProgressBar.offsetWidth)*audioElement.duration);
 })
+myProgressBar.addEventListener('drag',(e)=>{
+    audioElement.currentTime=((e.offsetX/myProgressBar.offsetWidth)*audioElement.duration);
+})
 
 Array.from(document.getElementsByClassName('plbtn')).forEach((element)=>{
     element.addEventListener('click',(e)=>{
@@ -55,6 +58,110 @@ Array.from(document.getElementsByClassName('plbtn')).forEach((element)=>{
         audioElement.play();
     })
 })
+Array.from(document.getElementsByClassName('shuffle')).forEach((element)=>{
+    element.addEventListener('click',(e)=>{
+            songIndex=Math.floor(Math.random()*(10-1+1))+1;
+            audioElement.src=`${songIndex}.mp3`;
+            name0.innerText=songs[songIndex-1].songname;
+            time0.innerText=songs[songIndex-1].timestamp;
+            audioElement.currentTime=0;
+            audioElement.play();
+            audioElement.addEventListener('ended',()=>{
+                songIndex=Math.floor(Math.random()*(10-1+1))+1;
+                audioElement.src=`${songIndex}.mp3`;
+                name0.innerText=songs[songIndex-1].songname;
+                time0.innerText=songs[songIndex-1].timestamp;
+                audioElement.currentTime=0;
+                audioElement.play();
+            })
+            
+                
+        })
+            
+})
+Array.from(document.getElementsByClassName('lop')).forEach((element)=>{
+    element.addEventListener('click',(e)=>{
+        lop.style.backgroundColor= "rgb(6, 15, 57)";
+        if(audioElement.paused){
+            songIndex=Math.floor(Math.random()*(10-1+1))+1;
+            audioElement.src=`${songIndex}.mp3`;
+            name0.innerText=songs[songIndex-1].songname;
+            time0.innerText=songs[songIndex-1].timestamp;
+            audioElement.currentTime=0;
+            audioElement.play();
+            audioElement.addEventListener('ended',()=>{
+                audioElement.src=`${songIndex}.mp3`;
+                name0.innerText=songs[songIndex-1].songname;
+                time0.innerText=songs[songIndex-1].timestamp;
+                audioElement.currentTime=0;
+                audioElement.play();
+            
+            })
+        }  
+        else{
+            Array.from(document.getElementsByClassName('plbtn')).forEach((element)=>{
+                element.addEventListener('click',(e)=>{
+                    songIndex= parseInt(e.target.id);
+                    audioElement.src=`${songIndex}.mp3`;
+                    name0.innerText=songs[songIndex-1].songname;
+                    time0.innerText=songs[songIndex-1].timestamp;
+                    audioElement.currentTime=0;
+                    audioElement.play();
+                    audioElement.addEventListener('ended',()=>{
+                        audioElement.src=`${songIndex}.mp3`;
+                        name0.innerText=songs[songIndex-1].songname;
+                        time0.innerText=songs[songIndex-1].timestamp;
+                        audioElement.currentTime=0;
+                        audioElement.play();
+                    })
+                })
+            })
+        }
+    
+    })
+})
+Array.from(document.getElementsByClassName('lop')).forEach((element)=>{
+    if(audioElement.paused){
+        element.addEventListener('dblclick',(e)=>{
+            lop.style.backgroundColor="";
+            audioElement.src=`${songIndex}.mp3`;
+            name0.innerText=songs[songIndex-1].songname;
+            time0.innerText=songs[songIndex-1].timestamp;
+            audioElement.currentTime=0;
+            audioElement.addEventListener('ended',(e)=>{
+                songIndex= parseInt(e.target.id);
+                audioElement.src=`${songIndex}.mp3`;
+                name0.innerText=songs[songIndex-1].songname;
+                time0.innerText=songs[songIndex-1].timestamp;
+                audioElement.currentTime=0;
+                audioElement.paused();
+            })
+        })
+    }  
+    else{
+        Array.from(document.getElementsByClassName('plbtn')).forEach((element)=>{
+            element.addEventListener('click',(e)=>{
+                songIndex= parseInt(e.target.id);
+                audioElement.src=`${songIndex}.mp3`;
+                name0.innerText=songs[songIndex-1].songname;
+                time0.innerText=songs[songIndex-1].timestamp;
+                audioElement.currentTime=0;
+                audioElement.paused();
+                audioElement.addEventListener('ended',(e)=>{
+                    songIndex= parseInt(e.target.id);
+                    audioElement.src=`${songIndex}.mp3`;
+                    name0.innerText=songs[songIndex-1].songname;
+                    time0.innerText=songs[songIndex-1].timestamp;
+                    audioElement.currentTime=0;
+                    audioElement.paused();
+                })
+                
+                
+            })
+        })
+    }
+}) 
+
 document.getElementById('next').addEventListener('click',()=>{
    if(songIndex>=10){
          songIndex=1;
