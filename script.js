@@ -19,7 +19,7 @@ let songIndex = 0;
 let myProgressBar = document.getElementsByClassName('myProgressBar')[0];
 let masterPlay = document.getElementById('masterPlay');
 let progressed = document.getElementById('progressed');
-let audioElement = new Audio("1.mp3")
+let audioElement = new Audio("1.mp3");
 songItems.forEach((element, i) => {
     element.getElementsByTagName("img")[0].src = songs[i].coverPath;
     element.getElementsByClassName("songName")[0].innerText = songs[i].songname;
@@ -104,7 +104,7 @@ Array.from(document.getElementsByClassName('shuffle')).forEach((element) => {
         myProgressBar.addEventListener('click', (e) => {
             audioElement.currentTime = ((e.offsetX / myProgressBar.offsetWidth) * audioElement.duration);
         })
-        
+
 
     })
 
@@ -137,4 +137,10 @@ document.getElementById('previous').addEventListener('click', () => {
     audioElement.play();
     name0.innerText = songs[songIndex - 1].songname;
     time0.innerText = songs[songIndex - 1].timestamp;
+})
+lop.addEventListener('click', () => {
+    audioElement.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
 })
