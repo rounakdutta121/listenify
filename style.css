@@ -160,3 +160,23 @@
     }
 
 }
+#login{
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    display: flex;
+    background-color: rgb(31, 31, 82);
+}
+.btn{
+    height: 50%;
+    background-color: rgb(31, 31, 82);
+    border: 2px solid white;
+    transition: all ease-in 1s;
+    padding: 0 12px;
+}
+.btn:hover{
+    height: 75%;
+}
+.btn  a{
+    color: white;
+}
