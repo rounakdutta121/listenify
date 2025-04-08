@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>login page</title>
+</head>
+<body>
+    <div class="container">
+        Welcome!
+    </div>
+    <div class="loginbox">
+        <h1 class="name">Name:</h1><input type="text" placeholder="Name" id="Name"> 
+        <h1 class="email">Email ID:</h1><input type="alphanumeric" placeholder="Email" id="Email">
+        <h1 class="age">Age:</h1><input type="number" id="Age" class="Age">
+        <button id="bttn">Submit</button>
+    </div>
+    <script>
+        let bttn= document.getElementById('bttn')
+        bttn.addEventListener('click', (e)=>{
+
+        e.preventDefault();
+        let  name = document.getElementById('Name').value;
+        console.log(name)
+        let  email = document.getElementById('Email').value;
+        console.log(email)
+        let  age = document.getElementById('Age').value;
+        console.log(age)
+        localStorage.setItem('Name', name);
+        localStorage.setItem('Email', email);
+        localStorage.setItem('Age', age);
+
+        })
+    </script>
+</body>
+</html>
